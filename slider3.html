@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        /* Full Screen Slider */
+        .slider {
+            width: 100%;
+            height: 100vh;
+        }
+        /* Each Slide */
+        .slider .item {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Image */
+        .slider .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        /* Navigation */
+        .slider .owl-nav button.owl-prev,
+        .slider .owl-nav button.owl-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: black;
+            font-size: 60px;
+            margin: 0;
+        }
+        .slider .owl-nav button.owl-prev {
+            left: 20px;
+        }
+        .slider .owl-nav button.owl-next {
+            right: 20px;
+        }
+        /* Dots */
+        .slider .owl-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .slider .owl-dot span {
+            width: 12px;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slider -->
+    <div class="slider owl-carousel">
+        <!-- Slide 1 -->
+        <div class="item">
+            <img src="i1.jpg"
+                 alt=""
+                 class="animate__animated animate__fadeIn">
+        </div>
+        <!-- Slide 2 -->
+        <div class="item">
+            <img src="i2.jpg"
+                 alt=""
+                 class="animate__animated animate__backInRight">
+        </div>
+        <!-- Slide 3 -->
+        <div class="item">
+            <img src="i3.jpg"
+                 alt=""
+                 class="animate__animated animate__zoomIn">
+        </div>
+        <!-- Slide 4 -->
+        <div class="item">
+            <img src="i4.webp"
+                 alt=""
+                 class="animate__animated animate__fadeInDown">
+        </div>
+        <!-- Slide 5 -->
+        <div class="item">
+            <img src="i5.jpg"
+                 alt=""
+                 class="animate__animated animate__lightSpeedInRight">
+        </div>
+    </div>
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 0,
+                nav: true,
+                dots: true,
+                smartSpeed: 800,
+                autoplay: false
+            });
+        });
+        $(document).ready(function () {
+            var animations = [
+                "animate__fadeIn",
+                "animate__backInRight",
+                "animate__zoomIn",
+                "animate__fadeInDown",
+                "animate__lightSpeedInRight"
+            ];
+            var slider = $(".owl-carousel");
+                slider.owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 0,
+                nav: true,
+                dots: true,
+                smartSpeed: 800,
+                autoplay: false
+            });
+            /* Animation when slide changes */
+           slider.on("translated.owl.carousel", function (event) {
+           var currentSlide =
+                 $(event.target)
+                 .find(".owl-item.active .item img");
+           /* Remove previous animation */
+            currentSlide.removeClass(
+                "animate__animated " +
+                "animate__fadeIn " +
+                "animate__backInRight " +
+                "animate__zoomIn " +
+                "animate__fadeInDown " +
+                "animate__lightSpeedInRight"
+            );
+            /* Restart animation */
+          void currentSlide[0].offsetWidth;
+            /* Get slide number */
+            var index =
+                $(event.target)
+                .find(".owl-item.active")
+                .index() % animations.length;
+            /* Add animation */
+                currentSlide.addClass(
+                "animate__animated " + animations[index]
+            );
+            });
+            });
+    </script>
+</body>
+</html>
